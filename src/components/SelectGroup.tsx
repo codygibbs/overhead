@@ -1,11 +1,16 @@
 import { ChangeEvent } from "react"
 
+export interface Option {
+  label: string
+  value: string
+}
+
 interface Props {
   id: string
   label: string
   name: string
   onChange?: (value: string) => void
-  options: Record<string, string>
+  options: Option[]
 }
 
 const SelectGroup: React.FC<Props> = (props) => {
@@ -24,8 +29,8 @@ const SelectGroup: React.FC<Props> = (props) => {
         onChange={handleChange}
         className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md"
       >
-        {Object.keys(props.options).map((label, value) => (
-          <option key={value} value={value}>{label}</option>
+        {props.options.map((option) => (
+          <option key={option.value} value={option.value}>{option.label}</option>
         ))}
       </select>
     </div>
